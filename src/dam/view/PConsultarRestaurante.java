@@ -205,7 +205,7 @@ public class PConsultarRestaurante extends JPanel {
 	
 	
 	public void cargarCombo(ArrayList<String> listaRegiones) {
-		dcbmRegiones.removeAllElements(); //limpiamos el combobox
+		dcbmRegiones.removeAllElements();
 		dcbmRegiones.addElement(TODOS_ELEMENTOS);
 		dcbmRegiones.addAll(listaRegiones);
 	}

@@ -65,22 +65,7 @@ public class ControladorRestaurantes implements ActionListener {
 			
 		}   else if (e.getSource() instanceof JButton) {
 			if (e.getActionCommand().equals(PConsultarRestaurante.BTN_CONSULTAR)) {
-				String region = pConsultaRes.filtroRegion();
-				String distincion = pConsultaRes.filtroDistincion();
-				ArrayList<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
-				if (region.equals(PConsultarRestaurante.TODOS_ELEMENTOS) && distincion.equals(PConsultarRestaurante.TODOS_ELEMENTOS)) {
-					listaRestaurantes = rp.seleccionarRestaurantes();
-					pConsultaRes.rellenarTabla(listaRestaurantes);
-					pConsultaRes.hacerTabVisi(true);
-				} else {
-					listaRestaurantes = rp.filtrarRestaurante(region, distincion);
-					pConsultaRes.rellenarTabla(listaRestaurantes);
-					pConsultaRes.hacerTabVisi(true);
-					if (listaRestaurantes.isEmpty()) {
-						JOptionPane.showMessageDialog(pConsultaRes, "No hay  datos para ese filtro", "No hay datos", JOptionPane.ERROR_MESSAGE);
-						pConsultaRes.hacerTabVisi(false);
-					}
-				}
+				consultaRestaurantes();
 
 			} else if (e.getActionCommand().equals(PConsultarRestaurante.BTN_ELIMINAR)) {
 				String restauranteEliminar = pConsultaRes.restauranteEliminar();
@@ -91,9 +76,7 @@ public class ControladorRestaurantes implements ActionListener {
 							"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (resp == JOptionPane.YES_OPTION) {
 						int res = rp.eliminarRestaurante(restauranteEliminar);
-						ArrayList<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
-						listaRestaurantes = rp.seleccionarRestaurantes(); //volvemos a rellenar la tabla para que desaparezca el restaurante eliminado automáticamente
-						pConsultaRes.rellenarTabla(listaRestaurantes);
+						consultaRestaurantes();
 						if (res==1) {
 							JOptionPane.showMessageDialog(pConsultaRes, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
 						} else {
@@ -155,6 +138,27 @@ public class ControladorRestaurantes implements ActionListener {
 			} else if (e.getActionCommand().equals(PModificacionRestaurante.BTN_CANCELAR)) {
 				pModRes.limpiarComponentes();
 				pModRes.hacerVisibleMod(false);
+			}
+		}
+	}
+
+
+
+	private void consultaRestaurantes() {
+		String region = pConsultaRes.filtroRegion();
+		String distincion = pConsultaRes.filtroDistincion();
+		ArrayList<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
+		if (region.equals(PConsultarRestaurante.TODOS_ELEMENTOS) && distincion.equals(PConsultarRestaurante.TODOS_ELEMENTOS)) {
+			listaRestaurantes = rp.seleccionarRestaurantes();
+			pConsultaRes.rellenarTabla(listaRestaurantes);
+			pConsultaRes.hacerTabVisi(true);
+		} else {
+			listaRestaurantes = rp.filtrarRestaurante(region, distincion);
+			pConsultaRes.rellenarTabla(listaRestaurantes);
+			pConsultaRes.hacerTabVisi(true);
+			if (listaRestaurantes.isEmpty()) {
+				JOptionPane.showMessageDialog(pConsultaRes, "No hay  datos para ese filtro", "No hay datos", JOptionPane.ERROR_MESSAGE);
+				pConsultaRes.hacerTabVisi(false);
 			}
 		}
 	}
