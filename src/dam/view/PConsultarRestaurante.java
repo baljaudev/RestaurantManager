@@ -193,7 +193,7 @@ public class PConsultarRestaurante extends JPanel {
 
 
 	public String restauranteEliminar() {
-		String nombreRes = "";
+		String nombreRes = null;
 		
 		if (tblRestaurantes.getSelectedRow() >= 0) { //si es menor, es que no hay ninguno seleccionado
 			int columna = 0; //la columna 0 contiene el nombre de los restaurantes según hemos configurado la tabla

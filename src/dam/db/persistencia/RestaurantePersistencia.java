@@ -25,8 +25,10 @@ public class RestaurantePersistencia {
 		
 		ArrayList<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
 		
-		String query = "SELECT " + RestauranteContract.COL_NOMBRE + "," + RestauranteContract.COL_CIUDAD + ", " + RestauranteContract.COL_DISTINCION + ", "
-				+ RestauranteContract.COL_COCINA + ", " + RestauranteContract.COL_PRECIO_MIN + ", " + RestauranteContract.COL_PRECIO_MAX 
+		String query = "SELECT " + RestauranteContract.COL_NOMBRE + "," + RestauranteContract.COL_CIUDAD 
+				+ ", " + RestauranteContract.COL_DISTINCION + ", "
+				+ RestauranteContract.COL_COCINA + ", " + RestauranteContract.COL_PRECIO_MIN 
+				+ ", " + RestauranteContract.COL_PRECIO_MAX 
 				+ " FROM " + RestauranteContract.NOM_TABLA;
 		
 		Connection conexion = null;
@@ -204,7 +206,8 @@ public class RestaurantePersistencia {
 	public String consultarResNom(String nombre) {
 		String cocina = null;
 		
-		String query =  "SELECT " +  RestauranteContract.COL_COCINA + " FROM " + RestauranteContract.NOM_TABLA + " WHERE " + RestauranteContract.COL_NOMBRE + " LIKE ?"; 
+		String query =  "SELECT " +  RestauranteContract.COL_COCINA + " FROM " + RestauranteContract.NOM_TABLA 
+				+ " WHERE " + RestauranteContract.COL_NOMBRE + " LIKE ?"; 
 		
 		Connection conexion = null;
 		PreparedStatement pstmt = null;

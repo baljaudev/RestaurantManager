@@ -99,6 +99,7 @@ public class VInicioGuiaMichelin extends JFrame {
 		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
 	}
 	
+	
 	public void hacerVisible() {
 		setVisible(true);
 	}

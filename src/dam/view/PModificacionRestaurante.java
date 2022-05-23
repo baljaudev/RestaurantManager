@@ -153,16 +153,16 @@ public class PModificacionRestaurante extends JPanel {
 		
 		btnGuardarMod = new JButton(BTN_GUARDAR_MOD);
 		btnGuardarMod.setEnabled(false);
-		btnGuardarMod.setBounds(100, 470, 160, 23);
+		btnGuardarMod.setBounds(100, 470, 193, 23);
 		add(btnGuardarMod);
 		
 		btnCancelar = new JButton(BTN_CANCELAR);
 		btnCancelar.setEnabled(false);
-		btnCancelar.setBounds(439, 470, 144, 23);
+		btnCancelar.setBounds(499, 470, 144, 23);
 		add(btnCancelar);
 		
 		btnBuscar = new JButton(BTN_BUSCAR);
-		btnBuscar.setBounds(275, 470, 126, 23);
+		btnBuscar.setBounds(332, 470, 126, 23);
 		add(btnBuscar);
 	}
 	
