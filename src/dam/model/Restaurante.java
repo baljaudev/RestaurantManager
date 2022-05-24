@@ -6,6 +6,8 @@ public class Restaurante {
 
 	public static final String[] DISTINCION = {PConsultarRestaurante.TODOS_ELEMENTOS, "1", "2", "3"};
 	public static final String[] COCINA = {"Creativa", "Moderna", "Tradicional", "Regional", "Fusión"};
+	public static final String[] TODAS_CCAA = {"Andalucia", "Aragón", "Asturias", "Canarias", "Cantabria", "Castilla y León", "Castilla - La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana"
+												,"Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Madrid", "Melilla", "Murcia", "Navarra", "País Vasco"};
 	
 	private int id;
 	private String nombre;

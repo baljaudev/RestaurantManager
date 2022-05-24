@@ -7,7 +7,6 @@ import dam.control.ControladorRestaurantes;
 import dam.model.Restaurante;
 
 import java.awt.Font;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,7 +37,6 @@ public class PRegistroRestaurante extends JPanel {
 	private JButton btnLimpiar;
 	private JComboBox<String> cmbCocina;
 	private JSpinner spnEstrellas;
-	private DefaultComboBoxModel<String> dcbmRegiones;
 	
 	
 	public PRegistroRestaurante() {
@@ -80,8 +78,7 @@ public class PRegistroRestaurante extends JPanel {
 		
 		cmbRegion = new JComboBox<String>();
 		cmbRegion.setBounds(134, 130, 159, 22);
-		dcbmRegiones = new DefaultComboBoxModel<>();
-		cmbRegion.setModel(dcbmRegiones);
+		cmbRegion.setModel(new DefaultComboBoxModel<String>(Restaurante.TODAS_CCAA));
 		add(cmbRegion);
 		
 		JLabel lblCiudad = new JLabel("Ciudad:");
@@ -219,12 +216,6 @@ public class PRegistroRestaurante extends JPanel {
 
 	public void mostrarError(String error) {
 		JOptionPane.showMessageDialog(this, error, "Error de datos", JOptionPane.ERROR_MESSAGE);
-	}
-	
-	
-	public void cargarCombo(ArrayList<String> listaRegiones) {
-		dcbmRegiones.removeAllElements();
-		dcbmRegiones.addAll(listaRegiones);
 	}
 	
 	

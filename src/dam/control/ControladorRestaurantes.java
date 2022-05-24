@@ -46,9 +46,6 @@ public class ControladorRestaurantes implements ActionListener {
 				vInicio.cargarPanel(pConsultaRes);
 				pConsultaRes.hacerTabVisi(false);
 			} else if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_REGISTRO)) {
-				ArrayList<String> listaRegiones = new ArrayList<String>();
-				listaRegiones = rp.seleccionarRegiones();
-				pRegistroRes.cargarCombo(listaRegiones);
 				vInicio.cargarPanel(pRegistroRes);
 			} else if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_MODIFICACION)) {
 				ArrayList<String> listaRegiones = new ArrayList<String>();
