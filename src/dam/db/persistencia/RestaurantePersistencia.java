@@ -298,7 +298,8 @@ public class RestaurantePersistencia {
 	public ArrayList<String> seleccionarRegiones() {
 		ArrayList<String> listaRegiones = new ArrayList<String>();
 		
-		String query = "SELECT DISTINCT " + RestauranteContract.COL_REGION + " FROM " + RestauranteContract.NOM_TABLA;
+		String query = "SELECT DISTINCT " + RestauranteContract.COL_REGION + " FROM " + RestauranteContract.NOM_TABLA + " ORDER BY " 
+						+ RestauranteContract.COL_REGION;
 		
 		Connection conexion = null;
 		Statement stmt = null;
