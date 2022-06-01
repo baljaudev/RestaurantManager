@@ -65,76 +65,101 @@ public class ControladorRestaurantes implements ActionListener {
 				consultaRestaurantes();
 
 			} else if (e.getActionCommand().equals(PConsultarRestaurante.BTN_ELIMINAR)) {
-				String restauranteEliminar = pConsultaRes.restauranteEliminar();
-				if (restauranteEliminar == null) {
-					JOptionPane.showMessageDialog(pConsultaRes, "No se ha seleccionado ningún restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
-				} else {
-					int resp = JOptionPane.showConfirmDialog(pConsultaRes, "Se va a eliminar el restaurante, ¿desea continuar?",
-							"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-					if (resp == JOptionPane.YES_OPTION) {
-						int res = rp.eliminarRestaurante(restauranteEliminar);
-						consultaRestaurantes();
-						if (res==1) {
-							JOptionPane.showMessageDialog(pConsultaRes, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
-						} else {
-							JOptionPane.showMessageDialog(pConsultaRes, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
-						}						
-					}
-				}
+				eliminarRestaurante();
 				
 			} else if (e.getActionCommand().equals(PRegistroRestaurante.BTN_GUARDAR)) {
-				Restaurante nuevoRes = pRegistroRes.obtenerDatos();
-				if (nuevoRes != null) {
-					String cocinaRes = rp.consultarResNom(nuevoRes.getNombre());
-					if (cocinaRes != null) {
-						pRegistroRes.mostrarError("Ya existe un restaurante con ese nombre");
-					} else {
-						int resp = rp.registrarRestaurante(nuevoRes);
-						
-						if (resp == 1) {
-							JOptionPane.showMessageDialog(pRegistroRes, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
-							pRegistroRes.limpiarComponentes();
-						} else {
-							pRegistroRes.mostrarError("No se ha podido añadir el restaurante");
-						}
-					}
-				}
+				registrarNuevoRestaurante();
 				
 			} else if (e.getActionCommand().equals(PRegistroRestaurante.BTN_LIMPIAR)) {
 				pRegistroRes.limpiarComponentes();
 				
 			} else if (e.getActionCommand().equals(PModificacionRestaurante.BTN_BUSCAR)) {
-				String nomRes = pModRes.obtenerNombre();
-				if (nomRes.trim().isEmpty()) {
-					JOptionPane.showMessageDialog(pModRes, "Debe introducir un nombre", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					String cocinaRes = rp.consultarResNom(nomRes);
-					if (cocinaRes == null) {
-						pModRes.mostrarError("No se ha encontrado ningún restaurante con el nombre introducido");
-					} else {
-						Restaurante restaurante = rp.selecionarUnRestaurante(nomRes);
-						pModRes.rellenarDatos(restaurante);
-						pModRes.hacerVisibleMod(true);
-					}
-				} 
+				buscarRestauranteMod(); 
 				
 			} else if (e.getActionCommand().equals(PModificacionRestaurante.BTN_GUARDAR_MOD)) {
-				Restaurante restMod = pModRes.comrpobarDatosMod();
-				if (restMod  == null) {
-					pModRes.mostrarError("No han podido guardarse los cambios");
-				} else {
-					int resp = rp.modRestaurante(restMod);
-					
-					if (resp == 1) {
-						JOptionPane.showMessageDialog(pModRes, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
-						pModRes.limpiarComponentes();
-					} else {
-						pModRes.mostrarError("No han podido guardarse los cambios");
-					}
-				}
+				modificarRestaurante();
+				
 			} else if (e.getActionCommand().equals(PModificacionRestaurante.BTN_CANCELAR)) {
 				pModRes.limpiarComponentes();
 				pModRes.hacerVisibleMod(false);
+			}
+		}
+	}
+
+
+
+	private void modificarRestaurante() {
+		Restaurante restMod = pModRes.comrpobarDatosMod();
+		if (restMod  == null) {
+			pModRes.mostrarError("No han podido guardarse los cambios");
+		} else {
+			int resp = rp.modRestaurante(restMod);
+			
+			if (resp == 1) {
+				JOptionPane.showMessageDialog(pModRes, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				pModRes.limpiarComponentes();
+			} else {
+				pModRes.mostrarError("No han podido guardarse los cambios");
+			}
+		}
+	}
+
+
+
+	private void buscarRestauranteMod() {
+		String nomRes = pModRes.obtenerNombre();
+		if (nomRes.trim().isEmpty()) {
+			JOptionPane.showMessageDialog(pModRes, "Debe introducir un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			String cocinaRes = rp.consultarResNom(nomRes);
+			if (cocinaRes == null) {
+				pModRes.mostrarError("No se ha encontrado ningún restaurante con el nombre introducido");
+			} else {
+				Restaurante restaurante = rp.selecionarUnRestaurante(nomRes);
+				pModRes.rellenarDatos(restaurante);
+				pModRes.hacerVisibleMod(true);
+			}
+		}
+	}
+
+
+
+	private void registrarNuevoRestaurante() {
+		Restaurante nuevoRes = pRegistroRes.obtenerDatos();
+		if (nuevoRes != null) {
+			String cocinaRes = rp.consultarResNom(nuevoRes.getNombre());
+			if (cocinaRes != null) {
+				pRegistroRes.mostrarError("Ya existe un restaurante con ese nombre");
+			} else {
+				int resp = rp.registrarRestaurante(nuevoRes);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegistroRes, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegistroRes.limpiarComponentes();
+				} else {
+					pRegistroRes.mostrarError("No se ha podido añadir el restaurante");
+				}
+			}
+		}
+	}
+
+
+
+	private void eliminarRestaurante() {
+		String restauranteEliminar = pConsultaRes.restauranteEliminar();
+		if (restauranteEliminar == null) {
+			JOptionPane.showMessageDialog(pConsultaRes, "No se ha seleccionado ningún restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int resp = JOptionPane.showConfirmDialog(pConsultaRes, "Se va a eliminar el restaurante, ¿desea continuar?",
+					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (resp == JOptionPane.YES_OPTION) {
+				int res = rp.eliminarRestaurante(restauranteEliminar);
+				consultaRestaurantes();
+				if (res==1) {
+					JOptionPane.showMessageDialog(pConsultaRes, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(pConsultaRes, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+				}						
 			}
 		}
 	}
