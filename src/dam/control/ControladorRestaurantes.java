@@ -40,24 +40,16 @@ public class ControladorRestaurantes implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JMenuItem) {
 			if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_CONSULTAR)) {
-				ArrayList<String> listaRegiones = new ArrayList<String>();
-				listaRegiones = rp.seleccionarRegiones();
-				pConsultaRes.cargarCombo(listaRegiones);
-				vInicio.cargarPanel(pConsultaRes);
-				pConsultaRes.hacerTabVisi(false);
+				cargaElementosConsulta();
+				
 			} else if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_REGISTRO)) {
 				vInicio.cargarPanel(pRegistroRes);
+				
 			} else if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_MODIFICACION)) {
-				ArrayList<String> listaRegiones = new ArrayList<String>();
-				listaRegiones = rp.seleccionarRegiones();
-				pModRes.cargarCombo(listaRegiones);
-				vInicio.cargarPanel(pModRes);
+				cargaElementosMod();
+				
 			} else if (e.getActionCommand().equals(VInicioGuiaMichelin.MNIM_SALIR)) {
-				int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
-						"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if (resp == JOptionPane.YES_OPTION) {
-					System.exit(0);
-				}
+				salirApp();
 			}
 			
 		}   else if (e.getSource() instanceof JButton) {
@@ -83,6 +75,35 @@ public class ControladorRestaurantes implements ActionListener {
 				pModRes.limpiarComponentes();
 				pModRes.hacerVisibleMod(false);
 			}
+		}
+	}
+
+
+
+	private void cargaElementosMod() {
+		ArrayList<String> listaRegiones = new ArrayList<String>();
+		listaRegiones = rp.seleccionarRegiones();
+		pModRes.cargarCombo(listaRegiones);
+		vInicio.cargarPanel(pModRes);
+	}
+
+
+
+	private void cargaElementosConsulta() {
+		ArrayList<String> listaRegiones = new ArrayList<String>();
+		listaRegiones = rp.seleccionarRegiones();
+		pConsultaRes.cargarCombo(listaRegiones);
+		vInicio.cargarPanel(pConsultaRes);
+		pConsultaRes.hacerTabVisi(false);
+	}
+
+
+
+	private void salirApp() {
+		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
+				"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (resp == JOptionPane.YES_OPTION) {
+			System.exit(0);
 		}
 	}
 
